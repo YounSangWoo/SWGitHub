@@ -1,0 +1,77 @@
+
+import sys, heapq
+input = sys.stdin.readline
+from collections import deque
+
+
+Tree = list(map(int, input().split()))
+
+Trees = [list(map(int, input().split())) for _ in range(N)]
+
+int = [list(int(input())for _ in range(5))]
+
+N=int(input())
+
+A.sort() //오름차순정렬
+A.sort(reversed(A)) // 내림차순정렬
+
+이분탐색
+N = int(input())
+A = [None]*N
+A = list(map(int, (input().split()[:N])))   # N개 이상 입력을 해도 N번째 입력까지만 A에 저장 된다.
+
+M = int(input())
+B = [None]*M
+B = list(map(int, input().split()[:M]))
+A.sort()
+
+for i in B:
+    pl = 0
+    pr = N-1
+    while True:
+        pc = (pl+pr)//2
+        if A[pc] == i:
+            print(1)
+            break
+        elif A[pc] < i:
+            pl = pc+1
+        else:
+            pr = pc-1
+        if pl > pr:
+            print(0)
+            break
+
+
+ # 스택 예외처리 이용
+import sys
+input = sys.stdin.readline
+
+
+N = int(input())
+stack = []
+for _ in range(N):
+    word = input().split()
+    order = word[0]
+
+    if order == "push":
+        value = word[1]
+        stack.append(value)
+
+    elif order == "pop":
+        try:
+            print(stack.pop())
+        except:
+            print(-1)
+    elif order == "size":
+        print(len(stack))
+
+    elif order == "empty":
+        if len(stack) == 0:
+            print(1)
+        else:
+            print(0)
+    elif order == "top":
+        try:
+            print(stack[-1])
+        except:
+            print(-1)
