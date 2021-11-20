@@ -3,7 +3,7 @@ import sys, heapq
 input = sys.stdin.readline
 from collections import deque
 
-
+L.sort(key = lambda x : (x[0],-x[1]))
 Tree = list(map(int, input().split()))
 
 Trees = [list(map(int, input().split())) for _ in range(N)]

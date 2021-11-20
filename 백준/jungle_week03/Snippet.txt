@@ -75,3 +75,23 @@ for _ in range(N):
             print(stack[-1])
         except:
             print(-1)
+
+
+===========FIND=============
+
+def find(parent, x):
+    if parent[x] == x:
+        return x
+    parent[x] = find(parent, parent[x])
+    return parent[x]
+
+
+# 두 원소가 속한 집합을 합치기 (간선 연결한다고 생각!)
+def union(parent, a, b):
+    rootA = find(parent, a)
+    rootB = find(parent, b)
+
+    if rootA < rootB:
+        parent[rootB] = rootA 
+    else:
+        parent[rootA] = rootB
