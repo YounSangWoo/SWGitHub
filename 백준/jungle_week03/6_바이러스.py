@@ -5,7 +5,7 @@ import sys
 input = sys.stdin.readline
 
 
-# 유니온 파인드 알고리즘을 이용한 풀이 틀렸다고 나옴
+# 유니온 파인드 알고리즘을 이용한 풀이
  
 def find(x):
     if parent[x] == x:
@@ -37,15 +37,13 @@ for _ in range(e):
     a, b = map(int, input().split())
     edges.append((a, b))
 
-edges.sort(key=lambda x: x[1])
-
 for edge in edges:
     a, b = edge
     if find(a) != find(b):
         union(a, b)
 
 for i in range(2, len(parent)):
-    if parent[i] == parent[1]:
+    if find(parent[i]) == parent[1]:
         virus += 1
 
 print(virus)
