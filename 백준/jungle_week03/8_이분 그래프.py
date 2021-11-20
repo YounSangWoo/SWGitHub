@@ -40,8 +40,8 @@ import sys
 input = sys.stdin.readline
 sys.setrecursionlimit(10**9)
 
-def dfs(v, group):
-    visit_list[v] = group
+def dfs(v, color):
+    visit_list[v] = color
     for i in graph[v]:
         if visit_list[i] == 0 and graph[v][i] == 1:
         dfs(i)
@@ -78,16 +78,25 @@ for i in range(len(ans)):
 # dfs
 
 
-def dfs(v, group):
-    visited[v] = group  # 방문한 노드에 group 할당 
+def dfs(v, color):
+    visited[v] = color  # 방문한 노드에 color 할당 
     for i in graph[v]:
         if visited[i] == 0:  # 아직 안 가본 곳이면 방문
-            k = dfs(i, -group)
+            k = dfs(i, -color)  #color change
             if not k:
                 return False
         elif visited[i] == visited[v]:  # 방문한 곳인데, 그룹이 동일하면 False
             return False
     return True
+
+""" 
+시작노드와 시작 컬러를 받는다
+방문리스트에 시작노드의 컬러를 할당
+시작노드와 연결된 자식들을 검사
+자식들이 방문한 노드라면 자식을 시작노드로 다시 dfs 이때 자식노드의 컬러는 부모와 반대가 되도록
+방문한 곳의 컬러가 인접노드컬러와 동일하다면? 이분그래프가 아님  
+
+"""
 
 
 T = int(input())
