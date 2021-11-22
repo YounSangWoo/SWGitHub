@@ -79,7 +79,8 @@ for i in range(1, v+1):
         visited = [0] * (v+1)  # 방문한 정점 체크
         dfs(i,inout)
 
-print(count) """
+print(count) 
+"""
 
 #200점 !
 
