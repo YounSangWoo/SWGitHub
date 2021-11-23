@@ -52,3 +52,54 @@ while True:
     year += 1
 
 print(year)
+
+
+""" 
+import sys
+input = sys.stdin.readline
+from collections import deque
+
+dy = [-1, 1, 0, 0]
+dx = [0, 0, -1, 1]
+def bfs(y, x, visit):
+    q = deque()
+    melt = deque()
+    q.append((y, x))
+    visit[y][x] = 1
+    while q:
+        y, x = q.popleft()
+        cnt = 0
+
+        for d in range(4):
+            ny = y + dy[d]
+            nx = x + dx[d]
+
+            if 0 <= ny < N and 0 <= nx < M and not visit[ny][nx]:
+                if not Map[ny][nx]: cnt += 1
+                elif Map[ny][nx]:
+                    visit[ny][nx] = 1
+                    q.append((ny, nx))
+        if cnt:
+            melt.append((y, x, cnt))
+    for _ in range(len(melt)):
+        y, x, c = melt.popleft()
+        Map[y][x] = max(0, Map[y][x] - c)
+
+N, M = map(int, input().split())
+Map = [list(map(int, input().split())) for _ in range(N)]
+t = 0
+
+while 1:
+    zone = 0
+    visit = [[0] * M for _ in range(N)]
+    for i in range(1, N - 1):
+        for j in range(1, M - 1):
+            if Map[i][j] and not visit[i][j]:
+                zone += 1
+                bfs(i, j, visit)
+    if zone == 0:
+        print(0); break
+    elif zone >= 2: 
+        print(t); break
+    t += 1;
+ """
