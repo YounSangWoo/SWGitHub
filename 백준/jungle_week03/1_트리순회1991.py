@@ -48,8 +48,6 @@ for i in range(n):
         right_node = None
     Tree[data] = [data, left_node, right_node]
 # 전위순회
-
-
 def pre_order(data: str):
     print(Tree[data][0], end='')
     if Tree[data][1] != None:
@@ -57,18 +55,16 @@ def pre_order(data: str):
     if Tree[data][2] != None:
         pre_order(Tree[data][2])
 
+
 # 중위순회
-
-
 def in_order(data: str):
     if Tree[data][1] != None:
         in_order(Tree[data][1])
     print(Tree[data][0], end='')
     if Tree[data][2] != None:
         in_order(Tree[data][2])
+
 # 후위순회
-
-
 def post_order(data: str):
     if Tree[data][1] != None:
         post_order(Tree[data][1])
