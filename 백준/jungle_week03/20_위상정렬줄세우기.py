@@ -61,7 +61,7 @@ def topology_sort():
         now = q.popleft()
         result.append(now)
         for i in graph[now]:
-            indegree[i] -=1 #now 에서 나가는 진출차수는 곧 연결된돗의 진입차수 이므로 진입차수 제거
+            indegree[i] -=1 #now 에서 나가는 진출차수는 곧 연결된곳의 진입차수 이므로 진입차수 제거
             if indegree[i] == 0:
                 q.append(i)
     

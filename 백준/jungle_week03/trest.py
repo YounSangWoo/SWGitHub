@@ -1,34 +1,42 @@
 import sys
-from collections import deque
+import heapq
+input = sys.stdin.readline
+
+N = int(input())
+
+graph = [[] for _ in range(N+1)]
+indegree = [0]*(N+1)
+v_info = [list(map(int, input().strip()))for _ in range(N)]
+
+for i in range(N):
+    for n in range(N):
+        if v_info[i][n] == 1:
+            graph[i+1].append(n+1)
+            indegree[n+1] += 1
+result = []
+ans = [[] for _ in range(N+1)]
 
 
-n, m = map(int, sys.stdin.readline().split())
-h_graph = [[] for _ in range (n+1)]
-l_graph = [[] for _ in range (n+1)]
-for _ in range(m):
-    h, l = map(int, sys.stdin.readline().split())
-    h_graph[l].append(h)
-    l_graph[h].append(l)
+def topology_sort():
+    q = []
+    for i in range(1, N+1):
+        if indegree[i] == 0:
+            heapq.heappush(q, i)
+    while q:
+        now = heapq.heappop(q)
+        result.append(now)
+        for i in graph[now]:
+            indegree[i] -= 1
+            if indegree[i] == 0:
+                heapq.heappush(q, i)
 
-def dfs(num, g):
-    stack = deque()
-    stack.append(num)
-    visitied = [False for _ in range(n+1)]
-    cnt = 0
-    while stack:
-        cur = stack.pop()
-        visitied[cur] = True
-        for item in g[cur]:
-            if visitied[item] == False:
-                stack.append(item)
-                cnt += 1
-    return cnt
-limit = n//2#n은 홀수  2
-limit_over=0
-for i in range(1, n+1):
-    if dfs(i, h_graph) > limit: # 절반 + 1 보다 클경우
-        limit_over += 1
-    if dfs(i, l_graph) > limit:
-        limit_over += 1
 
-print(limit_over)
+topology_sort()
+
+if len(result) != N:
+    print(-1)
+else:
+    for index, b in enumerate(result):
+        ans[b] = index+1
+    for i in range(1, N+1):
+        print(ans[i], end=' ')
