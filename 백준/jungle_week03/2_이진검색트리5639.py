@@ -27,6 +27,7 @@ while True:
 def pretopost(A: list):
     if len(A) <= 1:
        return A
+
     else :
          for i in range(1,len(A)):
             if A[i] > A[0]:
