@@ -1,42 +1,21 @@
-import sys
-import heapq
-input = sys.stdin.readline
+N, K = map(int, input().split())
+stuff = [[0, 0]]
+knapsack = [[0 for _ in range(K + 1)] for _ in range(N + 1)]
 
-N = int(input())
-
-graph = [[] for _ in range(N+1)]
-indegree = [0]*(N+1)
-v_info = [list(map(int, input().strip()))for _ in range(N)]
-
-for i in range(N):
-    for n in range(N):
-        if v_info[i][n] == 1:
-            graph[i+1].append(n+1)
-            indegree[n+1] += 1
-result = []
-ans = [[] for _ in range(N+1)]
+for _ in range(N):
+    stuff.append(list(map(int, input().split())))
 
 
-def topology_sort():
-    q = []
-    for i in range(1, N+1):
-        if indegree[i] == 0:
-            heapq.heappush(q, i)
-    while q:
-        now = heapq.heappop(q)
-        result.append(now)
-        for i in graph[now]:
-            indegree[i] -= 1
-            if indegree[i] == 0:
-                heapq.heappush(q, i)
+#냅색 문제 풀이
+for i in range(1, N + 1):
+    for j in range(1, K + 1):
+        weight = stuff[i][0]
+        value = stuff[i][1]
 
+        if j < weight:
+            knapsack[i][j] = knapsack[i - 1][j]  # weight보다 작으면 위의 값을 그대로 가져온다
+        else:
+            knapsack[i][j] = max(value + knapsack[i - 1]
+                                 [j - weight], knapsack[i - 1][j])
 
-topology_sort()
-
-if len(result) != N:
-    print(-1)
-else:
-    for index, b in enumerate(result):
-        ans[b] = index+1
-    for i in range(1, N+1):
-        print(ans[i], end=' ')
+print(knapsack[N][K])
