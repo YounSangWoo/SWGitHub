@@ -1,21 +1,26 @@
-N, K = map(int, input().split())
-stuff = [[0, 0]]
-knapsack = [[0 for _ in range(K + 1)] for _ in range(N + 1)]
+def Greedy(k, data):
+    target, coin_list = k, data
+    sum, total_count = 0, 0
 
-for _ in range(N):
-    stuff.append(list(map(int, input().split())))
+    while len(coin_list) != 0:
+        coin = coin_list.pop()
 
-
-#냅색 문제 풀이
-for i in range(1, N + 1):
-    for j in range(1, K + 1):
-        weight = stuff[i][0]
-        value = stuff[i][1]
-
-        if j < weight:
-            knapsack[i][j] = knapsack[i - 1][j]  # weight보다 작으면 위의 값을 그대로 가져온다
+        if coin + sum > k:
+            continue
         else:
-            knapsack[i][j] = max(value + knapsack[i - 1]
-                                 [j - weight], knapsack[i - 1][j])
+            coin_count = int(target / coin)
+            target = target % coin
+            sum += coin_count * coin
+            total_count += coin_count
 
-print(knapsack[N][K])
+        if sum == target:
+            break
+    print(total_count)
+
+
+N, K = list(map(int, input().split()))
+A = []
+for _ in range(N):
+    A.append(int(input()))
+
+Greedy(K, A)
