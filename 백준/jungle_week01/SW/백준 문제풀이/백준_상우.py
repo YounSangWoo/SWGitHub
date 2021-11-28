@@ -515,7 +515,7 @@ for i in range(n):
  """
 
 
-import sys
+""" import sys
 sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
 
@@ -545,7 +545,7 @@ nums = list(int(input()) for _ in range(n))
 
 Qsort(nums,0,n-1) #퀵정렬을 이용 정렬
 for i in nums:
-    print(i)
+    print(i) """
 
 # 30번 수 정렬하기2 https://www.acmicpc.net/problem/2751 쉘 사용
 """
@@ -573,7 +573,6 @@ for i in range(x):
 shell(a)
 for i in range(x):
     print(a[i]) """
-
 
 
 # 31번 수 정렬하기3 https://www.acmicpc.net/problem/10989 도수정렬 후명이꺼 참조
@@ -713,14 +712,51 @@ print(cost)
     
 """
 # 36 안전영역 https://www.acmicpc.net/problem/2468
-""" import sys
+from collections import deque
+import sys
 input = sys.stdin.readline
 
-N = int(input().strip()) #N은 2이상 100이하 정수
-area = [None]*N
-cost = sys.maxsize
+
+N = int(input().strip())
+area = []
+max_rain = 0
+
 for i in range(N):
-    area[i] = list(map(int, input().strip().split()))
+    area.append(list(map(int, input().rstrip().split())))
+
+for i in range(N):
+    for j in range(N):
+        if area[i][j] > max_rain:
+            max_rain = area[i][j]
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
 
 
-def safe() """
+def bfs(x, y, visit,rain):
+    q = deque()
+    q.append((x, y))
+    visit[x][y] = 1
+    while q:
+        x, y = q.popleft()
+        for d in range(4):
+            nx = x + dx[d]
+            ny = y + dy[d]
+            if 0 <= ny < N and 0 <= nx < N and not visit[nx][ny]:
+                if area[nx][ny] > rain:
+                    q.append((nx, ny))
+                    visit[nx][ny] = 1
+
+
+maxarea = -sys.maxsize
+for i in range(max_rain-1, -1, -1):
+    visit = [[0]*(N) for _ in range(N)]
+    safearea = 0
+    for j in range(N):
+        for k in range(N):
+            if visit[j][k] == 0 and area[j][k] > i:
+                bfs(j, k, visit, i)
+                safearea += 1
+    maxarea = max(maxarea, safearea)
+
+print(maxarea)
