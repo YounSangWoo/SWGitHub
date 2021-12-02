@@ -24,7 +24,7 @@ dp = [[0]*(K+1) for _ in range(N+1)]
 
 for i in range(1, N + 1):
     for j in range(1, K + 1):
-        weight = warray[i][0]        
+        weight = warray[i][0]         
         value = warray[i][1]
 
         if j < weight:
@@ -35,3 +35,4 @@ for i in range(1, N + 1):
 print(dp[N][K])
 
 
+ 
