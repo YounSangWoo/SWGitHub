@@ -53,7 +53,7 @@ j = 0
 for i in bw:
     while j < N and wv[j][0] <= i:
     # 보석의 무게가 가방의 무게보다 작다면 담을 수 있다.
-        heapq.heappush(result, -wv[j][1])
+        heapq.heappush(result, -wv[j][0])
         j+=1
     if result:
         ans += heapq.heappop(result)
