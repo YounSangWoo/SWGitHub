@@ -1,9 +1,6 @@
 """ import sys
 input = sys.stdin.readline """
 
-# 1번 2557 문제
-""" print('Hello World!') """
-
 # 2번 10869 두 자연수 A와 B가 주어진다. 이때, A+B, A-B, A*B, A/B(몫), A%B(나머지)를 출력하는 프로그램을 작성하시오.
 # 두 자연수 A와 B가 주어진다. (1 ≤ A, B ≤ 10,000)
 
@@ -275,7 +272,7 @@ else:
     print(b+2)     """
 
 # 21번 1987번 소수찾기
-"""
+
 
 n = int(input())
 y=list(map(int,input().split()))
@@ -293,7 +290,7 @@ def prime(a):
 for i in range(n):
     if prime(y[i])==True:
         count +=1
-print(count) """
+print(count) 
 
 
 # 리스트 안에서 값의 갯수를 찾기
@@ -712,7 +709,7 @@ print(cost)
     
 """
 # 36 안전영역 https://www.acmicpc.net/problem/2468
-from collections import deque
+""" from collections import deque
 import sys
 input = sys.stdin.readline
 
@@ -760,3 +757,4 @@ for i in range(max_rain-1, -1, -1):
     maxarea = max(maxarea, safearea)
 
 print(maxarea)
+ """
